@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function DropZone({ acceptedFile, lable, onDrop }: Props) {
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
   return (
     <div
       {...getRootProps()}
