@@ -57,10 +57,12 @@ def submit():
     if is_auth():
         jdFile = request.files['jd-file']
         cvFile = request.files['cv-file']
+        jdName = request.form.get('jdName')
+        personName = request.form.get('personName')
         print(jdFile.name)
         #jdtext = extractText(jdFile)
         matchResponse = match.call_openai(extractText(jdFile),extractText(cvFile))
-
+        matchResponse = ""
         return jsonify({"answer":json.dumps(matchResponse)}),200
     else: 
         return jsonify({"error": "unauthorized"}),400

@@ -6,6 +6,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  TextField,
   Typography,
 } from "@mui/material";
 import NavBar from "./components/NavBar/Navbar";
@@ -21,17 +22,21 @@ function App() {
   const [output, setOutput] = useState<AnswerResponse>({
     answer: "",
   });
+  const [jdName, setJdName] = useState<string | null>(null);
+  const [personName, setPersonName] = useState<string | null>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const onDropJd = useCallback((acceptedFiles: File[]) => {
     // Do something with the files
     setJdFile(acceptedFiles[0]);
+    // setJdName(acceptedFiles[0].name);
     console.log(acceptedFiles[0].name);
   }, []);
 
   const onDropResume = useCallback((acceptedFiles: File[]) => {
     // Do something with the files
     setResumeFile(acceptedFiles[0]);
+    // setPersonName(acceptedFiles[0].name);
     console.log(acceptedFiles[0].name);
     console.log(resumeFile?.name);
   }, []);
@@ -39,16 +44,20 @@ function App() {
   const onClickReset = () => {
     setOutput({ answer: "" });
     setResumeFile(null);
+    setJdName(null);
+    setPersonName(null);
     setJdFile(null);
   };
 
   const handleUpload = async () => {
-    if (resumeFile && jdFile) {
+    if (resumeFile && jdFile && jdName && personName) {
       try {
         setIsLoading(true);
         const formData = new FormData();
         formData.append("jd-file", jdFile);
         formData.append("cv-file", resumeFile);
+        formData.append("jdName", jdName);
+        formData.append("personName", personName);
 
         // Replace 'YOUR_BACKEND_API_URL' with the actual backend API endpoint
         const response = await fetch("/match", {
@@ -75,7 +84,7 @@ function App() {
       <NavBar />
       {output.answer == "" ? (
         <Box>
-          <Box sx={{ mx: 4, my: 1 }}>
+          <Box sx={{ mx: 4, marginTop: 1 }}>
             <Box
               sx={{
                 display: "flex",
@@ -89,7 +98,7 @@ function App() {
               </Typography>
             </Box>
             <Box sx={{ mx: 16 }}>
-              <Grid container columnSpacing={20} spacing={4} sx={{ my: 2 }}>
+              <Grid container columnSpacing={20} spacing={4} sx={{ my: 1 }}>
                 <Grid item md={6}>
                   <Box
                     sx={{
@@ -105,6 +114,16 @@ function App() {
                       lable={"JD"}
                     />
                   </Box>
+                  <TextField
+                    sx={{ marginTop: 2, width: "100%" }}
+                    required
+                    id="outlined-required"
+                    label="Job Role Name"
+                    value={jdName}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setJdName(event.target.value);
+                    }}
+                  />
                 </Grid>
                 <Grid item md={6}>
                   <Box
@@ -120,12 +139,24 @@ function App() {
                       onDrop={onDropResume}
                       lable={"Resume"}
                     />
+                    <TextField
+                      sx={{ marginTop: 2, width: "100%" }}
+                      required
+                      id="outlined-required"
+                      label="Candidate Name"
+                      value={personName}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        setPersonName(event.target.value);
+                      }}
+                    />
                   </Box>
                 </Grid>
               </Grid>
               <Box
                 sx={{
-                  my: 6,
+                  my: 3,
                   display: "flex",
                   justifyContent: "center",
                   flexDirection: "column",
@@ -136,6 +167,7 @@ function App() {
                   variant="contained"
                   sx={{ display: "flex", width: 400, marginBottom: 3 }}
                   onClick={handleUpload}
+                  disabled={!(jdName && jdFile && resumeFile && personName)}
                 >
                   Submit
                 </Button>

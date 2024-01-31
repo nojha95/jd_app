@@ -2,11 +2,12 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
+import { useTheme } from "@mui/material/styles";
 import { Button, CssBaseline } from "@mui/material";
 // import MenuIcon from '@mui/icons-material/Menu';
 
 export default function NavBar() {
+  const theme = useTheme();
   const onClickLogout = async () => {
     await fetch("/logout");
     window.location.reload();
@@ -20,8 +21,9 @@ export default function NavBar() {
             sx={{
               display: "flex",
               alignItems: "center",
+
               // justifyContent: "center",
-              flexGrow: 1,
+
               mx: 4,
             }}
           >
@@ -40,6 +42,20 @@ export default function NavBar() {
             </Typography>
 
             {/* <img src={logo_hindi} style={{ height: "30px" }} /> */}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "0.5rem",
+              flexGrow: 1,
+              marginLeft: "20vw",
+              [theme.breakpoints.down("md")]: {
+                marginLeft: "20px",
+              },
+            }}
+          >
+            <Typography color={"black"}>Home</Typography>
+            <Typography color={"black"}>Report</Typography>
           </Box>
           <Button onClick={onClickLogout} sx={{ mx: 4, color: "black" }}>
             Logout
