@@ -4,6 +4,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import { Button, CssBaseline } from "@mui/material";
+import { Link } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
 // import MenuIcon from '@mui/icons-material/Menu';
 
 export default function NavBar() {
@@ -46,7 +49,7 @@ export default function NavBar() {
           <Box
             sx={{
               display: "flex",
-              gap: "0.5rem",
+              gap: "1rem",
               flexGrow: 1,
               marginLeft: "20vw",
               [theme.breakpoints.down("md")]: {
@@ -54,8 +57,22 @@ export default function NavBar() {
               },
             }}
           >
-            <Typography color={"black"}>Home</Typography>
-            <Typography color={"black"}>Report</Typography>
+            <Link to="/">
+              <Box
+                sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}
+              >
+                <HomeIcon />
+                <Typography color={"black"}> Home</Typography>
+              </Box>
+            </Link>
+            <Link to="aisearch">
+              <Box
+                sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}
+              >
+                <SearchIcon />
+                <Typography color={"black"}>Search</Typography>
+              </Box>
+            </Link>
           </Box>
           <Button onClick={onClickLogout} sx={{ mx: 4, color: "black" }}>
             Logout

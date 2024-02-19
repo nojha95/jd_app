@@ -52,6 +52,7 @@ def logout():
     session.clear()
     return "ok"
 
+
 @app.route('/match', methods=['POST'])
 def submit():
     if is_auth():

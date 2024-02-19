@@ -10,8 +10,8 @@ from bs4 import BeautifulSoup
 # openai.organization = os.getenv("OPENAI_ORGANIZATION")
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 
-openai.organization = 'org-LcshV1lWzSVxSJQG60J5WWF5'
-openai.api_key = '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'
+openai.organization = 'org-ZR1HLWB8PtHcL5wf3Wu6nZrF'
+openai.api_key = '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'
 
 def call_openai(jd_text,resume_text):
 
