@@ -219,9 +219,10 @@ function CVMatch() {
               p: 4,
             }}
           >
-            <Typography style={{ whiteSpace: "pre-line" }}>
-              {output.answer}
-            </Typography>
+            <Typography
+              style={{ whiteSpace: "pre-line" }}
+              dangerouslySetInnerHTML={{ __html: output.answer }}
+            ></Typography>
             {/* <Answer answer={output.answer} /> */}
           </Box>
         </>
