@@ -13,7 +13,7 @@ import {
 import DropZone from "../../components/DropZone/DropZone";
 import { AnswerResponse } from "../../api/models";
 import logo from "../../assets/DB_logo.png";
-import Answer from "../../components/Answer/Answer";
+// import Answer from "../../components/Answer/Answer";
 
 function CVMatch() {
   // const [count, setCount] = useState(0);
@@ -219,10 +219,10 @@ function CVMatch() {
               p: 4,
             }}
           >
-            {/* <Typography style={{ whiteSpace: "pre-line" }}>
+            <Typography style={{ whiteSpace: "pre-line" }}>
               {output.answer}
-            </Typography> */}
-            <Answer answer={output.answer} />
+            </Typography>
+            {/* <Answer answer={output.answer} /> */}
           </Box>
         </>
       )}

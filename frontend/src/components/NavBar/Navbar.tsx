@@ -61,7 +61,7 @@ export default function NavBar() {
               <Box
                 sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}
               >
-                <HomeIcon />
+                <HomeIcon sx={{ color: "#000" }} />
                 <Typography color={"black"}> Home</Typography>
               </Box>
             </Link>
@@ -69,7 +69,7 @@ export default function NavBar() {
               <Box
                 sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}
               >
-                <SearchIcon />
+                <SearchIcon sx={{ color: "#000" }} />
                 <Typography color={"black"}>Search</Typography>
               </Box>
             </Link>

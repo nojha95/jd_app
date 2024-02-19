@@ -41,12 +41,12 @@ def call_openai(jd_text,resume_text):
         )
 
     answer = completion.choices[0].message.content
-    soup = BeautifulSoup(answer, 'html.parser')
-    data_dict = {}
-    for tag in soup.find_all('b'):
-        key = tag.text.strip()
-        value = tag.next_sibling.strip()
-        data_dict[key] = value
+    # soup = BeautifulSoup(answer, 'html.parser')
+    # data_dict = {}
+    # for tag in soup.find_all('b'):
+    #     key = tag.text.strip()
+    #     value = tag.next_sibling.strip()
+    #     data_dict[key] = value
     
     #print(answer)
-    return data_dict
+    return answer
