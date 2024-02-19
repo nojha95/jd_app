@@ -14,6 +14,7 @@ export default defineConfig({
     proxy: {
       "/match": "http://localhost:5000",
       "/logout": "http://localhost:5000",
+      "/search": "http://localhost:5000",
     },
   },
 });

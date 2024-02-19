@@ -1,14 +1,28 @@
 import { Box, InputBase, Typography } from "@mui/material";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
+import { SearchRequest } from "../../api/models";
+import { aiSearchApi } from "../../api/api";
 const AiSearch = () => {
   const [searchQuery, setSearchQuery] = useState<string>();
+  const [result, setResult] = useState<string>();
+
+  const makeApiRequest = async () => {
+    if (searchQuery) {
+      const request: SearchRequest = {
+        query: searchQuery,
+      };
+      const result = await aiSearchApi(request);
+      setResult(result);
+    }
+  };
 
   return (
     <Box
       sx={{
-        minHeight: "85vh",
+        // minHeight: "75vh",
         display: "flex",
+        paddingTop: result ? "3rem" : "13rem",
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -41,10 +55,14 @@ const AiSearch = () => {
               setSearchQuery(event.target.value);
             }}
           />
-          <Box sx={{ marginLeft: "auto", cursor: "pointer" }}>
+          <Box
+            sx={{ marginLeft: "auto", cursor: "pointer" }}
+            onClick={makeApiRequest}
+          >
             <SendIcon />
           </Box>
         </Box>
+        <Typography>{result}</Typography>
       </Box>
     </Box>
   );
