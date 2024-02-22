@@ -5,10 +5,14 @@ import tempfile
 import PyPDF2
 import json
 from pathlib import Path
+import requests
 
 app = Quart(__name__)
 app.secret_key = '4ec42e0f4a56e99e7a315fab323a10a27f14182ef73cb01d2b86d4fc2e4a5306'
 valid_user = {'username': 'dbhasker', 'password': 'DBhasker#2@23'}
+
+url = "https://api.perplexity.ai/chat/completions"
+
 
 @app.route('/')
 async def index():
@@ -75,9 +79,35 @@ async def submit():
     
 @app.route('/search', methods=['POST'])
 async def aisearch():
-    if is_auth():
-        response = "The ndjansd nansknknfk sanfnkn anskfnknaklsnflk sngsnjgn"
-        return jsonify({"answer": response }),200
+    if True:
+        data = await request.json
+        query = data['query']
+        
+        payload = {
+            "model": "pplx-70b-online",
+            "messages": [
+            {
+                "role": "system",
+                "content": "Be precise and concise."
+            },
+            {
+                "role": "user",
+                "content": query
+            }
+        ]
+        }
+        headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Bearer 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"
+        }
+        response = requests.post(url, json=payload, headers=headers)
+        # print(response.text)
+        # response_op = response.text["choices"][0]['message']['content']
+        
+        # print(response_op)
+        # response = "The ndjansd nansknknfk sanfnkn anskfnknaklsnflk sngsnjgn"
+        return jsonify({"answer": response.text }),200
     else:
         return jsonify({"error": "unauthorized"}),400
 

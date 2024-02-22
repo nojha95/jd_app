@@ -7,6 +7,7 @@ import { Button, CssBaseline } from "@mui/material";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
+
 // import MenuIcon from '@mui/icons-material/Menu';
 
 export default function NavBar() {
@@ -62,7 +63,7 @@ export default function NavBar() {
                 sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}
               >
                 <HomeIcon sx={{ color: "#000" }} />
-                <Typography color={"black"}> Home</Typography>
+                <Typography color={"black"}>Home</Typography>
               </Box>
             </Link>
             <Link to="aisearch">
