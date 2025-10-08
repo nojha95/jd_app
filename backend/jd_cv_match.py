@@ -1,17 +1,16 @@
 import click
 import PyPDF2
 import openai
-# from dotenv import load_dotenv
+import os
+from dotenv import load_dotenv
 import tempfile
 from bs4 import BeautifulSoup
 
-# load_dotenv('.env_file')
+# Load environment variables
+load_dotenv()
 
-# openai.organization = os.getenv("OPENAI_ORGANIZATION")
-# openai.api_key = os.getenv("OPENAI_API_KEY")
-
-openai.organization = '.'
-openai.api_key = '.'
+openai.organization = os.getenv("OPENAI_ORGANIZATION")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def call_openai(jd_text,resume_text):
 
